@@ -35,7 +35,7 @@ public class MemoRepositoryTests {
     public void testSelect() {
 
         // DB에 존재하는 mno
-        Long mno = 100L;
+        Long mno = 99L;
 
         Optional<Memo> result = memorepository.findById(mno);
 
@@ -54,10 +54,25 @@ public class MemoRepositoryTests {
 
         Long mno = 99L;
 
-        Memo memo = memorepository.getOne(mno);
+        Memo memo = memorepository.getReferenceById(mno);
 
         System.out.println("===================================");
 
         System.out.println(memo);
+    }
+
+    @Test
+    public void testUpdate() {
+
+        Memo memo = Memo.builder().mno(99L).memoText("업데이트 테스트한 내용 100번은 삭제함").build();
+
+        System.out.println(memorepository.save(memo));
+    }
+
+    @Test
+    public void testDelete() {
+        Long mno = 100L;
+
+        memorepository.deleteById(mno);
     }
 }
